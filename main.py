@@ -13,11 +13,10 @@ def get_link_qty(links):
 
 def get_all_links(url, links, limit):
     linkqty = get_link_qty(links)     
-    print("[+] linkslen", linkqty)    
     if linkqty >= limit:
         return links
     else:
-        """ print("[+] Getting all links from: " + url) """
+        print("[+] Getting all links from: " + url)
         reqs = requests.get(url)
         content = reqs.text    
         soup = BeautifulSoup(content, 'html.parser')    
@@ -37,10 +36,7 @@ def get_all_links(url, links, limit):
         else:
             links[str(currentUrl)] = 'No links found'
         
-        newQty = get_link_qty(links)
-        
-        print("[+] currentUrlQty =", currentUrlQty + 1)
-        print("[+] newQty", newQty)   
+        newQty = get_link_qty(links)        
         
         if newQty < limit :
             print("[+] Remaining =", limit - newQty) 
